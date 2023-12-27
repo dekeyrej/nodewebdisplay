@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webdisplay
+  namespace: default
+  labels:
+    k8s-app: webdisplay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: webdisplay
+  template:
+    metadata:
+      name: webdisplay
+      labels:
+        k8s-app: webdisplay
+    spec:
+      containers:
+      - name: nodeawebdisplaypiserver
+        image: ghcr.io/dekeyrej/webdisplay:latest
+        imagePullPolicy: Always
+        securityContext:
+          privileged: false
+      imagePullSecrets:
+        - name: ghcr-login-secret
