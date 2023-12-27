@@ -1,7 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Header from './components/Header'
-// import BaseURL from './components/BaseURL';
+import Header from './components/Header';
 import EnviroPage from './pages/EnviroPage';
 import NFLPage from './pages/NFLPage';
 

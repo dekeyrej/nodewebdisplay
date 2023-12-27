@@ -6,11 +6,6 @@ import Hourly from './Hourly';
 import Forecast from './Forecast';
 import Moon from './Moon';
 
-// const apihost = process.env.APIHOST;
-// const apiport = process.env.APIPORT;
-
-// const BaseURL = `http://${apihost}:${apiport}`;
-
 const data = await (async () => {
     const response = await fetch(`${BaseURL}/environment`);
     if (response.ok) {

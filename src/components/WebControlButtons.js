@@ -3,11 +3,6 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import axios from 'axios';
 import BaseURL from './BaseURL.js';
 
-// const apihost = process.env.APIHOST;
-// const apiport = process.env.APIPORT;
-
-// const BaseURL = `http://${apihost}:${apiport}`;
-
 export default function WebControlButtons () {
 
     function clickHandler (btn) {

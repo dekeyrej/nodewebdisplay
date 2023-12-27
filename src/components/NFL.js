@@ -3,11 +3,6 @@ import Stack from 'react-bootstrap/Stack';
 import BaseURL from './BaseURL.js';
 import getSortMethod from '../utils/getSortMethod';
 
-// const apihost = process.env.APIHOST;
-// const apiport = process.env.APIPORT;
-
-// const BaseURL = `http://${apihost}:${apiport}`;
-
 const data = await (async () => {
     const response = await fetch(`${BaseURL}/nfl`);
     if (response.ok) {
