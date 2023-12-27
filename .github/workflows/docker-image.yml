@@ -28,4 +28,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: "ghcr.io/dekeyrej/webdisplay:latest"
+        tags: "ghcr.io/dekeyrej/nodewebdisplay:latest"
