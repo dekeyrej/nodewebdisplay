@@ -1,7 +1,5 @@
-import fs from 'fs';
+import Config from '../config/config.json';
 
-const Config = JSON.parse(fs.readFileSync('./config/config.json', 'utf-8'));
 const BaseURL = `http://${Config.api_host}:${Config.api_port}`;
-// console.log(BaseURL);
 
-export default BaseURL;
+export default BaseURL

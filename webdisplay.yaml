@@ -17,8 +17,8 @@ spec:
         k8s-app: webdisplay
     spec:
       containers:
-      - name: nodeawebdisplaypiserver
-        image: ghcr.io/dekeyrej/webdisplay:latest
+      - name: webdisplay
+        image: ghcr.io/dekeyrej/nodewebdisplay:latest
         imagePullPolicy: Always
         securityContext:
           privileged: false
