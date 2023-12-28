@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:lts
 EXPOSE 3001
 WORKDIR /home/node/app
 COPY . .
