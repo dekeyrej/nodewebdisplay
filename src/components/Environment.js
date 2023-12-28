@@ -1,12 +1,13 @@
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
-import BaseURL from './BaseURL.js';
+import BaseURL from './BaseURL';
 import Current from './Current';
 import Hourly from './Hourly';
 import Forecast from './Forecast';
 import Moon from './Moon';
 
 const data = await (async () => {
+    console.log(`${BaseURL}/environment`);
     const response = await fetch(`${BaseURL}/environment`);
     if (response.ok) {
         const results = await response.json();

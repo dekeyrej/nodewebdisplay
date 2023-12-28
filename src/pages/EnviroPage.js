@@ -1,5 +1,5 @@
 import Body from '../components/Body';
-import Environment from '../components/Environment'
+import Environment from '../components/Environment';
 
 export default function EnviroPage(){
     return (

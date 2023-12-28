@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
-import BaseURL from './BaseURL.js';
+import BaseURL from './BaseURL';
 import getSortMethod from '../utils/getSortMethod';
 
 const data = await (async () => {
