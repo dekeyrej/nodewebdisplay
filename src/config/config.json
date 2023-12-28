@@ -1,4 +1,4 @@
 {
-    "api_host": "nodeapiserver.default",
+    "api_host": "nodeapiserver",
     "api_port": "3000"
 }
