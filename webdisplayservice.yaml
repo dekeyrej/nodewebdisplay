@@ -6,8 +6,8 @@ metadata:
 spec:
   clusterIP: None
   ports:
-  - port: 3000
-    targetPort: 3000
+  - port: 3001
+    targetPort: 3001
     name: webdisplay
   selector:
     k8s-app: webdisplay

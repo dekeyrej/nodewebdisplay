@@ -1,5 +1,5 @@
 FROM node:lts
-EXPOSE 3000
+EXPOSE 3001
 WORKDIR /home/node/app
 COPY . .
 RUN npm install
