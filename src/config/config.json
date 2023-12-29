@@ -1,4 +1,4 @@
 {
-    "api_host": "nodeapiserver",
+    "api_host": "192.168.86.49",
     "api_port": "3002"
 }
