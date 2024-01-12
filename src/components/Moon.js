@@ -13,7 +13,7 @@ export default function Moon({moon, date}) {
                     <tr>
                         <td rowSpan="3">
                             <img
-                                src={`img/moon/moon${moon.phase}.bmp`}
+                                src={`img/moon/moon${moon.phase.toString().padStart(2,'0')}.bmp`}
                                 alt={`Moon Phase: ${moon.phase}`}
                                 width="128px" 
                                 height="128px" 
