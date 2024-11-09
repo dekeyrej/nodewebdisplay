@@ -16,6 +16,7 @@ return (
         <Button variant="light" name="pp"  onClick={clickHandler}>Play/Pause</Button>
         <Button variant="light" name="fwd" onClick={clickHandler}>FWD</Button>
         <Button variant="light" name="out" onClick={clickHandler}>Garbage Out</Button>
+        <Button variant="light" name="reload" onClick={clickHandler}>Reload Matrix</Button>
     </ButtonGroup>
 )
 }
