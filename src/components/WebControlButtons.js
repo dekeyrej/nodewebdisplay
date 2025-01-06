@@ -16,6 +16,7 @@ const WebControlButtons = () => {
         { name: 'pp',  label: 'Play/Pause' },
         { name: 'fwd', label: 'FWD' },
         { name: 'out', label: 'Garbage Out' }
+        { name: 'reload', label: 'Reload Matrix' }
     ];
 
     return (
