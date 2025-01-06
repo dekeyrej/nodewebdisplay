@@ -20,6 +20,10 @@ spec:
       - name: webdisplay
         image: ghcr.io/dekeyrej/nodewebdisplay:latest
         imagePullPolicy: Always
+        resources:
+            requests:
+              cpu: 10m
+              memory: 512i
         securityContext:
           privileged: false
       imagePullSecrets:

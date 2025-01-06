@@ -1,21 +1,32 @@
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import axios from 'axios';
 import BaseURL from './BaseURL.js';
 
-export default function WebControlButtons () {
+const WebControlButtons = () => {
 
-    function clickHandler (btn) {
-        const URL = `${BaseURL}/webcontrol/${btn.target.name}`;
+    const clickHandler = (event) => {
+        const URL = `${BaseURL}/webcontrol/${event.target.name}`;
         axios.put(URL);
     };
 
-return (
-    <ButtonGroup aria-label="Basic example">
-        <Button variant="light" name="rew" onClick={clickHandler}>REW</Button>
-        <Button variant="light" name="pp"  onClick={clickHandler}>Play/Pause</Button>
-        <Button variant="light" name="fwd" onClick={clickHandler}>FWD</Button>
-        <Button variant="light" name="out" onClick={clickHandler}>Garbage Out</Button>
-    </ButtonGroup>
-)
-}
+    const buttons = [
+        { name: 'rew', label: 'REW' },
+        { name: 'pp',  label: 'Play/Pause' },
+        { name: 'fwd', label: 'FWD' },
+        { name: 'out', label: 'Garbage Out' }
+    ];
+
+    return (
+        <ButtonGroup aria-label="Basic example">
+            {buttons.map((btn) => (
+                <Button key={btn.name} variant="light" name={btn.name} onClick={clickHandler}>
+                    {btn.label}
+                </Button>
+            ))}
+        </ButtonGroup>
+    );
+};
+
+export default WebControlButtons;

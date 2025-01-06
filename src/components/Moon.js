@@ -1,4 +1,5 @@
 export default function Moon({moon, date}) {
+    const { phase, sunevent, moonevent, illumstr } = moon;
 
     return (
         <>
@@ -13,19 +14,19 @@ export default function Moon({moon, date}) {
                     <tr>
                         <td rowSpan="3">
                             <img
-                                src={`img/moon/moon${moon.phase.toString().padStart(2,'0')}.bmp`}
-                                alt={`Moon Phase: ${moon.phase}`}
+                                src={`img/moon/moon${phase.toString().padStart(2,'0')}.bmp`}
+                                alt={`Moon Phase: ${phase}`}
                                 width="128px" 
                                 height="128px" 
                             />
                         </td>
-                        <td>{moon.sunevent}</td>
+                        <td>{sunevent}</td>
                     </tr>
                     <tr>
-                        <td>{moon.moonevent}</td>
+                        <td>{moonevent}</td>
                     </tr>
                     <tr>
-                        <td>Lunar Illumination: {moon.illumstr}</td>
+                        <td>Lunar Illumination: {illumstr}</td>
                     </tr>
                 </tbody>
             </table>
