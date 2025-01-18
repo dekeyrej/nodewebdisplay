@@ -24,7 +24,15 @@ spec:
             requests:
               cpu: 10m
               memory: 512i
+        volumeMounts:
+        - name: secret-volume
+          mountPath: /home/node/app/config
+          readOnly: true
         securityContext:
           privileged: false
       imagePullSecrets:
         - name: ghcr-login-secret
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: matrix-secrets
