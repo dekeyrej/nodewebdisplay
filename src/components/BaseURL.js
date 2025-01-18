@@ -1,6 +1,6 @@
-import Config from './Config.js';
+const api_port = 3002
 
-const BaseURL = `http://${Config.api_host}:${Config.api_port}`;
+const BaseURL = `http://${window.location.hostname}:${api_port}`;
 console.log(BaseURL);
 
 export default BaseURL
