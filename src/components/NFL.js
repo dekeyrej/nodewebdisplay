@@ -123,15 +123,17 @@ export default function NFL() {
     }
 
     const gameCount = data.NFL.length;
-    const gamesr1 = data.NFL.slice(0,4).map(renderGame);
-    const gamesr2 = data.NFL.slice(4,8).map(renderGame);
-    const gamesr3 = data.NFL.slice(8,12).map(renderGame);
-    const gamesr4 = data.NFL.slice(12,16).map(renderGame);
+    const gamesr1 = data.NFL.events.slice(0,4).map(renderGame);
+    const gamesr2 = data.NFL.events.slice(4,8).map(renderGame);
+    const gamesr3 = data.NFL.events.slice(8,12).map(renderGame);
+    const gamesr4 = data.NFL.events.slice(12,16).map(renderGame);
 
     return (
         <Stack direction="horizontal" className="NFL">
             <Container className="NFL">
-                <h2>National Football League - Week {data.NFL[0].week}:</h2>
+                <h2>National Football League - {data.NFL.seasontype}:<br/>
+                {data.NFL.weekname}
+                </h2>
                 <div className="row">
                     {gamesr1}
                 </div>
