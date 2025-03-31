@@ -6,4 +6,4 @@ COPY . .
 # CMD ["npm", "start"]
 # RUN npm run build
 RUN npm install -g serve
-CMD ["serve", "build", "-l 3001"]
+CMD ["serve", "build", "-s", "-l", "3001"]
