@@ -121,8 +121,8 @@ export default function NFL() {
     if (data.NFL.length === 0) {
         return <div>Loading...</div>;
     }
-
-    const gameCount = data.NFL.length;
+    
+    // const gamesr1 =  data.NFL.events.map(renderGame);   
     const gamesr1 = data.NFL.events.slice(0,4).map(renderGame);
     const gamesr2 = data.NFL.events.slice(4,8).map(renderGame);
     const gamesr3 = data.NFL.events.slice(8,12).map(renderGame);
