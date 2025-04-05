@@ -7,6 +7,12 @@ export default function Sidebar() {
             <Nav.Item>
                 <Nav.Link href="/">Environment</Nav.Link>
                 <Nav.Link href="/nfl">NFL</Nav.Link>
+                <Nav.Link href="/mlb">MLB</Nav.Link>
+                <Nav.Link href="/mm/">MagicMirror</Nav.Link>
+                <Nav.Link href="/mm2/">MagicMirror-small screen</Nav.Link>
+                <Nav.Link href="/dashboard/#/">Cluster Dashboard</Nav.Link>
+                <Nav.Link href=":8080">Open-WebUI</Nav.Link>
+                <Nav.Link href=":3000">Grafana</Nav.Link>
             </Nav.Item>
         </Navbar>
     );
