@@ -1,115 +1,27 @@
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
-import BaseURL from './BaseURL';
+import { fetchData } from '../services/api';
 import getSortMethod from '../utils/getSortMethod';
+import InProgressGame from './NFLInProgress';
+import PreGame from './NFLPre';
+import PostGame from './NFLPost';
 import { useEffect, useState } from 'react';
 
-async function fetchData() {
-    const response = await fetch(`${BaseURL}/nfl`);
-    if (response.ok) {
-        const results = await response.json();
-        return results;
-    }
-    return [];
-}
-
-function InProgressGame({ game, index }) {
-    return (
-        <div className="col-md-3">
-            <table style={{border: '1px solid'}} key={index}>
-                <tbody>
-                    <tr><td colSpan="2" width="100px" style={{textAlign:'center'}}>In Progress...</td><td width="64px"><b>Score</b></td><td width="92px">&nbsp;</td></tr>
-                    <tr>    
-                        <td><img src={game.awaylogo} alt="" width="32px" height="32px" /></td>
-                        <td><b>{game.awayabrv}</b></td>
-                        <td style={{textAlign:'center'}}>{game.awayscore}</td>
-                        <td>{game.period}<br />{game.clock}</td>
-                    </tr>
-                    <tr>    
-                    <td><img src={game.homelogo} alt="" width="32px" height="32px" /></td>
-                        <td><b>{game.homeabrv}</b></td>
-                        <td style={{textAlign:'center'}}>{game.homescore}</td>
-                        <td>{game.downandyardage}<br />{game.position}</td>
-                    </tr>
-                    <tr>
-                        {game.possession ?  
-                        <td colSpan="4">{game.possession} has the ball.</td>
-                        :
-                        <td colSpan="4"></td>
-                    }
-                    </tr>
-                    <tr>    
-                        <td colSpan="4">{game.lastplay}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    );
-}
-
-function PreGame({ value, index }) {
-    return (
-        <div className="col-md-3">
-            <table style={{backgroundColor: 'WhiteSmoke'}} key={index}>
-                <tbody>
-                    <tr><td colSpan="4" width="256px" style={{textAlign:'right'}}>Scheduled - {value.date}</td></tr>
-                    <tr>    
-                        <td><img src={value.awaylogo} alt="" width="32px" height="32px" /></td>
-                        <td><b>{value.awayabrv}</b></td>
-                        <td>{value.awayrecord}</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>    
-                    <td><img src={value.homelogo} alt="" width="32px" height="32px" /></td>
-                        <td><b>{value.homeabrv}</b></td>
-                        <td>{value.homerecord}</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    );
-}
-
-function PostGame({ value, index }) {
-    return (
-        <div className="col-md-3">
-            <table style={{backgroundColor: 'LightGray'}} key={index}>
-                <tbody>
-                    <tr><td colSpan="3" width="256px" style={{textAlign:'center'}}>{value.date}</td><td>Final</td></tr>
-                    <tr>    
-                        <td><img src={value.awaylogo} alt="" width="32px" height="32px" /></td>
-                        <td><b>{value.awayabrv}</b></td>
-                        <td>{value.awayrecord}</td>
-                        <td>{value.awayscore}</td>
-                    </tr>
-                    <tr>    
-                    <td><img src={value.homelogo} alt="" width="32px" height="32px" /></td>
-                        <td><b>{value.homeabrv}</b></td>
-                        <td>{value.homerecord}</td>
-                        <td>{value.homescore}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    );
-}
-
 function renderGame(value, index) {
-    if (value.state === 'pre') {
-        return <PreGame value={value} index={index} />;
-    } else if (value.state === 'post') {
-        return <PostGame value={value} index={index} />;
-    } else {
-        return <InProgressGame game={value} index={index} />;
-    }
+    const components = {
+        pre: PreGame,
+        post: PostGame,
+        inProgress: InProgressGame,
+    };
+    const Component = components[value.state] || InProgressGame;
+    return <Component key={index} value={value} />;
 }
 
 export default function NFL() {
     const [data, setData] = useState({ NFL: [] });
 
     useEffect(() => {
-        fetchData().then(setData);
+        fetchData('NFL').then(setData);
     }, []);
 
     useEffect(() => {
@@ -122,7 +34,6 @@ export default function NFL() {
         return <div>Loading...</div>;
     }
     
-    // const gamesr1 =  data.NFL.events.map(renderGame);   
     const gamesr1 = data.NFL.events.slice(0,4).map(renderGame);
     const gamesr2 = data.NFL.events.slice(4,8).map(renderGame);
     const gamesr3 = data.NFL.events.slice(8,12).map(renderGame);
@@ -134,18 +45,10 @@ export default function NFL() {
                 <h2>National Football League - {data.NFL.seasontype}:<br/>
                 {data.NFL.weekname}
                 </h2>
-                <div className="row">
-                    {gamesr1}
-                </div>
-                <div className="row">
-                    {gamesr2}
-                </div>
-                <div className="row">
-                    {gamesr3}
-                </div>
-                <div className="row">
-                    {gamesr4}
-                </div>
+                <div className="row">{gamesr1}</div>
+                <div className="row">{gamesr2}</div>
+                <div className="row">{gamesr3}</div>
+                <div className="row">{gamesr4}</div>
             </Container>
         </Stack>
     );

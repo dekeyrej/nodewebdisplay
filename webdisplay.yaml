@@ -24,6 +24,9 @@ spec:
             requests:
               cpu: 10m
               memory: 512i
+            limits:
+              cpu: 100m
+              memory: 1Gi
         volumeMounts:
         - name: secret-volume
           mountPath: /home/node/app/config
