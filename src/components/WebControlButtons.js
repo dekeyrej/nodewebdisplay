@@ -1,15 +1,9 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import axios from 'axios';
-import BaseURL from './BaseURL.js';
+import { clickHandler } from '../services/api.js';
 
 const WebControlButtons = () => {
-
-    const clickHandler = (event) => {
-        const URL = `${BaseURL}/webcontrol/${event.target.name}`;
-        axios.put(URL);
-    };
 
     const buttons = [
         { name: 'rew', label: 'REW' },

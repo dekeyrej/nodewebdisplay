@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const BaseURL = process.env.REACT_APP_API_URL || `http://${window.location.hostname}/api`;
 
 const namesKeys = {
@@ -23,3 +25,8 @@ export async function fetchData(name) {
         return {};
     }
 }
+
+export const clickHandler = (event) => {
+    const URL = `${BaseURL}/webcontrol/${event.target.name}`;
+    axios.put(URL);
+};
