@@ -4,7 +4,7 @@ import Current from './Current';
 import Hourly from './Hourly';
 import Forecast from './Forecast';
 import Moon from './Moon';
-import { fetchData } from '../services/api';
+import { fetchData } from '../../services/api';
 import { useEffect, useState } from 'react';
 
 export default function Environment() {

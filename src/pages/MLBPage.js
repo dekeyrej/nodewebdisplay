@@ -1,10 +1,10 @@
 import Body from '../components/Body';
-import NFL from '../components/NFL/NFL'
+import MLB from '../components/MLB/MLB'
 
-export default function NFLPage(){
+export default function MLBPage(){
     return (
         <Body sidebar>
-            <NFL />
+            <MLB />
         </Body>
     )
 }

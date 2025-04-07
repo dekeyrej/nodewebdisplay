@@ -8,6 +8,7 @@ export default function Sidebar() {
                 <Nav.Link href="/">Environment</Nav.Link>
                 <Nav.Link href="/nfl">NFL</Nav.Link>
                 <Nav.Link href="/mlb">MLB</Nav.Link>
+                <Nav.Link><hr></hr></Nav.Link>
                 <Nav.Link href="/mm/">MagicMirror</Nav.Link>
                 <Nav.Link href="/mm2/">MagicMirror-small screen</Nav.Link>
                 <Nav.Link href={`https://${window.location.hostname}/dashboard/#/`}>Cluster Dashboard</Nav.Link>
