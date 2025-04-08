@@ -2,7 +2,7 @@ export default function PreGame({ value, index }) {
     // console.log(value, index);
     return (
         <div className="col-md-3">
-            <table style={{backgroundColor: 'WhiteSmoke'}} key={index}>
+            <table style={{border: '1px solid LightGray', backgroundColor: 'WhiteSmoke'}} key={index}>
                 <tbody>
                     <tr>
                         <td colSpan="3" width="144px" style={{textAlign:'center'}}>{value.startTime.slice(11)}</td>

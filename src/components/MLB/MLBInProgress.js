@@ -36,16 +36,16 @@ export default function InProgressGame({ value, index }) {
                     </tr>
                     <tr>    
                         <td><img src={value.awayLogo} alt="" width="32px" height="32px" /></td>
-                        <td><b>{value.awayAbbreviation}</b></td>
-                        <td style={{textAlign:'left', fontSize: '0.8em'}}>{value.awayRecord}</td>
+                        <td width="52px" style={{textAlign:'center'}}><b>{value.awayAbbreviation}</b></td>
+                        <td width="72px" style={{textAlign:'left', fontSize: '0.8em'}}>{value.awayRecord}</td>
                         <td style={{textAlign:'center'}}><b>{value.awayScore}</b></td>
                         <td style={{textAlign:'center'}}>{value.awayHits}</td>
                         <td style={{textAlign:'center'}}>{value.awayErrors}</td>
                     </tr>
                     <tr>    
                     <td><img src={value.homeLogo} alt="" width="32px" height="32px" /></td>
-                        <td><b>{value.homeAbbreviation}</b></td>
-                        <td style={{textAlign:'left', fontSize: '0.8em'}}>{value.homeRecord}</td>
+                        <td width="52px" style={{textAlign:'center'}}><b>{value.homeAbbreviation}</b></td>
+                        <td width="72px" style={{textAlign:'left', fontSize: '0.8em'}}>{value.homeRecord}</td>
                         <td style={{textAlign:'center'}}><b>{value.homeScore}</b></td>
                         <td style={{textAlign:'center'}}>{value.homeHits}</td>
                         <td style={{textAlign:'center'}}>{value.homeErrors}</td>
