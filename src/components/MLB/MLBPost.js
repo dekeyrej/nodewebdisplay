@@ -2,7 +2,7 @@ export default function PostGame({ value, index }) {
     // console.log(value, index);
     return (
         <div className="col-md-3">
-            <table style={{border: '1px solid LightGray'}} key={index}>
+            <table style={{border: '1px solid LightGray', backgroundColor: 'LightGray'}} key={index}>
                 <tbody>
                     <tr>
                         <td colSpan="3" width="144px" style={{textAlign:'center'}}><b>Final</b></td>
@@ -10,7 +10,7 @@ export default function PostGame({ value, index }) {
                         <td width="24px" style={{textAlign:'center'}}><b>R</b></td>
                         <td width="24px" style={{textAlign:'center'}}>H</td>
                         <td width="24px" style={{textAlign:'center'}}>E</td>
-                        </tr>
+                    </tr>
                     <tr>    
                         <td><img src={value.awayLogo} alt="" width="32px" height="32px" /></td>
                         <td><b>{value.awayAbbreviation}</b></td>
