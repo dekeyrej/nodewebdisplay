@@ -14,12 +14,12 @@ export default function PreGame({ value, index }) {
                     <tr>    
                         <td><img src={value.awayLogo} alt="" width="32px" height="32px" /></td>
                         <td><b>{value.awayAbbreviation}</b></td>
-                        <td>{value.awayRecord}</td>
+                        <td colSpan="2" style={{textAlign:'center', fontSize: '0.8em'}}>{value.awayRecord}</td>
                     </tr>
                     <tr>    
                     <td><img src={value.homeLogo} alt="" width="32px" height="32px" /></td>
                         <td><b>{value.homeAbbreviation}</b></td>
-                        <td>{value.homeRecord}</td>
+                        <td colSpan="2" style={{textAlign:'center', fontSize: '0.8em'}}>{value.homeRecord}</td>
                     </tr>
                 </tbody>
             </table>
