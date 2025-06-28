@@ -4,7 +4,7 @@ import Current from './Current';
 import Hourly from './Hourly';
 import Forecast from './Forecast';
 import Moon from './Moon';
-import { fetchData } from '../../services/api';
+import { fetchData, BaseURL } from '../../services/api';
 import { useEffect, useState } from 'react';
 
 export default function Environment() {
@@ -12,6 +12,22 @@ export default function Environment() {
 
     useEffect(() => {
         fetchData('Environment').then(setData);
+
+        const evtSource = new EventSource(`${BaseURL}/stream/webdisplay`);
+        evtSource.onmessage = (event) => {
+            try {
+            const { app } = JSON.parse(event.data);
+            if (app === 'Environment') {
+                fetchData('Environment').then(setData);
+            }
+            } catch (err) {
+            console.error('SSE Event parse error:', err);
+            }
+        };
+
+        return () => {
+            evtSource.close();
+        };
     }, []);
 
     if (!data) {

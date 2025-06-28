@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
-import { fetchData } from '../../services/api';
+import { fetchData, BaseURL } from '../../services/api';
 // import getSortMethod from '../../utils/getSortMethod';
 import InProgressGame from './MLBInProgress';
 import PreGame from './MLBPre';
@@ -22,13 +22,23 @@ export default function MLB() {
 
     useEffect(() => {
         fetchData('MLB').then(setData);
-    }, []);
 
-    // useEffect(() => {
-    //     if (data.MLB.length > 0) {
-    //         data.MLB.sort(getSortMethod('+fulldate'));
-    //     }
-    // }, [data]);
+        const evtSource = new EventSource(`${BaseURL}/stream/webdisplay`);
+        evtSource.onmessage = (event) => {
+            try {
+            const { app } = JSON.parse(event.data);
+            if (app === 'MLB') {
+                fetchData('MLB').then(setData);
+            }
+            } catch (err) {
+            console.error('SSE Event parse error:', err);
+            }
+        };
+
+        return () => {
+            evtSource.close();
+        };
+    }, []);
 
     if (data.MLB.length === 0) {
         return <div>Loading...</div>;

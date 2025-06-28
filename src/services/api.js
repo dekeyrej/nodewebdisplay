@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BaseURL = process.env.REACT_APP_API_URL || `http://${window.location.hostname}/api`;
+export const BaseURL = process.env.REACT_APP_API_URL || `http://${window.location.hostname}/api`;
 
 const namesKeys = {
     NFL: 'nfl',

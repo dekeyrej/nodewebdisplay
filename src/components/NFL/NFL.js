@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
-import { fetchData } from '../../services/api';
+import { fetchData, BaseURL } from '../../services/api';
 import getSortMethod from '../../utils/getSortMethod';
 import InProgressGame from './NFLInProgress';
 import PreGame from './NFLPre';
@@ -22,6 +22,22 @@ export default function NFL() {
 
     useEffect(() => {
         fetchData('NFL').then(setData);
+
+        const evtSource = new EventSource(`${BaseURL}/stream/webdisplay`);
+        evtSource.onmessage = (event) => {
+            try {
+            const { app } = JSON.parse(event.data);
+            if (app === 'NFL') {
+                fetchData('NFL').then(setData);
+            }
+            } catch (err) {
+            console.error('SSE Event parse error:', err);
+            }
+        };
+
+        return () => {
+            evtSource.close();
+        };
     }, []);
 
     useEffect(() => {
