@@ -6,6 +6,9 @@ const namesKeys = {
     NFL: 'nfl',
     MLB: 'mlb',
     Environment: 'environment',
+    AQI: 'environment/aqi',
+    Moon: 'environment/moon',
+    Weather: 'environment/weather',
 }
 /**
  * Fetch data from the API.
