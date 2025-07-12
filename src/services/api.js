@@ -1,23 +1,16 @@
 import axios from 'axios';
+// import Environment from '../components/Environment/Environment';
 
 export const BaseURL = process.env.REACT_APP_API_URL || `http://${window.location.hostname}/api`;
 
-const namesKeys = {
-    NFL: 'nfl',
-    MLB: 'mlb',
-    Environment: 'environment',
-    AQI: 'environment/aqi',
-    Moon: 'environment/moon',
-    Weather: 'environment/weather',
-}
 /**
  * Fetch data from the API.
  * @returns {Promise<Object>} The fetched data or an empty object on failure.
  */
 export async function fetchData(name) {
-    // console.log(`${BaseURL}/${namesKeys[name]}`);
+    console.log(`${BaseURL}/key/${name}`);
     try {
-        const response = await fetch(`${BaseURL}/${namesKeys[name]}`);
+        const response = await fetch(`${BaseURL}/key/${name}`);
         if (!response.ok) {
             console.error(`Error fetching ${name} data: ${response.statusText}`);
             return {};

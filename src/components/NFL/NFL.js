@@ -21,23 +21,43 @@ export default function NFL() {
     const [data, setData] = useState({ NFL: [] });
 
     useEffect(() => {
-        fetchData('NFL').then(setData);
+    // 🟢 Initial data fetch
+        fetchData('NFL').then((env) => {
+            if (env && typeof env === 'object') {
 
-        const evtSource = new EventSource(`${BaseURL}/stream/webdisplay`);
-        evtSource.onmessage = (event) => {
+            setData((prev) => ({
+                ...prev,
+                NFL: env.values || null,
+                }));
+            }
+        });
+
+        const evtSource = new EventSource(`${BaseURL}/events`);
+
+        const handleUpdate = async (type, incoming) => {
+            // const updated = incoming.updated ?? '';
+            // const [updateDate, updateTime] = updated.split(' -')[0]?.split(' ') ?? [];
+
+            setData((prev) => ({
+                ...prev,
+                [type]: incoming.values,  // direct assignment since shape matches `data[type]`
+            }));
+        };
+        // 🟢 SSE event listener
+        evtSource.addEventListener('update', (event) => {
             try {
-            const { app } = JSON.parse(event.data);
-            if (app === 'NFL') {
-                fetchData('NFL').then(setData);
+                const payload = JSON.parse(event.data);
+                
+                if (['NFL'].includes(payload.type)) {
+                    console.log('SSE payload:', payload);
+                    handleUpdate(payload.type, payload);
+                }
+            } catch (error) {
+                console.error('💥 SSE error:', error);
             }
-            } catch (err) {
-            console.error('SSE Event parse error:', err);
-            }
-        };
+        });
 
-        return () => {
-            evtSource.close();
-        };
+        return () => evtSource.close();
     }, []);
 
     useEffect(() => {
