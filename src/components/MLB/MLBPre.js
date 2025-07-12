@@ -5,8 +5,7 @@ export default function PreGame({ value, index }) {
             <table style={{border: '1px solid LightGray', backgroundColor: 'WhiteSmoke'}} key={index}>
                 <tbody>
                     <tr>
-                        <td colSpan="3" width="144px" style={{textAlign:'center'}}>{value.startTime.slice(11)}</td>
-                        <td width="72px" style={{textAlign:'center'}}>&nbsp;</td>
+                        <td colSpan="4" width="216px" style={{textAlign:'center'}}>{value.startTime.slice(11)}</td>
                         <td width="24px" style={{textAlign:'center'}}>&nbsp;</td>
                         <td width="24px" style={{textAlign:'center'}}>&nbsp;</td>
                         <td width="24px" style={{textAlign:'center'}}>&nbsp;</td>

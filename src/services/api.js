@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import Environment from '../components/Environment/Environment';
 
 export const BaseURL = process.env.REACT_APP_API_URL || `http://${window.location.hostname}/api`;
 
