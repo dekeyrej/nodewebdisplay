@@ -16,82 +16,68 @@ export default function Environment() {
     updateDate: null,
   });
 
+  const extractLatestUpdate = (env) => {
+    const times = [
+      env?.AQI?.updated,
+      env?.Moon?.updated,
+      env?.Weather?.updated,
+    ].filter(Boolean);
+
+    // Sort descending
+    times.sort((a, b) => new Date(b) - new Date(a));
+
+    const latest = times[0];
+    const [updateDate, updateTime] = latest?.split(' ') ?? [];
+
+    return { updateTime, updateDate };
+  };
+
+
   useEffect(() => {
     // 🟢 Initial data fetch
     fetchData('Environment').then((env) => {
       if (env && typeof env === 'object') {
-        setData((prev) => ({
-          ...prev,
-          ...env,
-        }));
-      }
+        const { updateTime, updateDate } = extractLatestUpdate(env);
+
+      setData((prev) => ({
+        ...prev,
+        AQI: env.AQI.values || null,
+        Moon: env.Moon.values || null,
+        Weather: env.Weather.values || null,
+        updateTime,
+        updateDate,
+          }));
+        }
     });
 
-    const evtSource = new EventSource(`${BaseURL}/stream/webdisplay`);
+    // console.log('EventSource URL:', `${BaseURL}/events`);
+    const evtSource = new EventSource(`${BaseURL}/events`);
 
-    evtSource.onmessage = async (event) => {
+    const handleUpdate = async (type, incoming) => {
+      const updated = incoming.updated ?? '';
+      const [updateDate, updateTime] = updated.split(' -')[0]?.split(' ') ?? [];
+
+      setData((prev) => ({
+        ...prev,
+        [type]: incoming.values,  // direct assignment since shape matches `data[type]`
+        updateTime: updateTime || prev.updateTime,
+        updateDate: updateDate || prev.updateDate,
+      }));
+    };
+    // 🟢 SSE event listener
+    evtSource.addEventListener('update', (event) => {
       try {
-        const { app } = JSON.parse(event.data);
-
-        if (app === 'Weather') {
-            const fresh = await fetchData(app);  // This includes { updateTime, updateDate, Weather: {...} }
-
-            if (fresh && typeof fresh === 'object' && fresh.Weather) {
-                setData(prev => ({
-                ...prev,
-                Weather: fresh.Weather,  // 👈 Strip the wrapper
-                updateTime: fresh.updateTime || prev.updateTime,
-                updateDate: fresh.updateDate || prev.updateDate,
-                }));
-            } else {
-                console.warn('⚠️ Unexpected shape in Weather update:', fresh);
-            }
-        } else if (app === 'AQI') {
-            const fresh = await fetchData(app);  // This includes { updateTime, updateDate, Weather: {...} }
-
-            if (fresh && typeof fresh === 'object' && fresh.AQI) {
-                setData(prev => ({
-                ...prev,
-                AQI: fresh.AQI,  // 👈 Strip the wrapper
-                updateTime: fresh.updateTime || prev.updateTime,
-                updateDate: fresh.updateDate || prev.updateDate,
-                }));
-            } else {
-                console.warn('⚠️ Unexpected shape in AQI update:', fresh);
-            }
-        } else if (app === 'Moon') {
-            const fresh = await fetchData(app);  // This includes { updateTime, updateDate, Weather: {...} }
-
-            if (fresh && typeof fresh === 'object' && fresh.Moon) {
-                setData(prev => ({
-                ...prev,
-                Moon: fresh.Moon,  // 👈 Strip the wrapper
-                updateTime: fresh.updateTime || prev.updateTime,
-                updateDate: fresh.updateDate || prev.updateDate,
-                }));
-            } else {
-                console.warn('⚠️ Unexpected shape in Moon update:', fresh);
-            }
+        const payload = JSON.parse(event.data);
+        
+        if (['AQI', 'Moon', 'Weather'].includes(payload.type)) {
+          console.log('SSE payload:', payload);
+          handleUpdate(payload.type, payload);
         }
-
-        // if (['AQI', 'Moon', 'Weather'].includes(app)) {
-        //   const fresh = await fetchData(app);
-
-        //   if (fresh && typeof fresh === 'object' && Object.keys(fresh).length > 0) {
-        //     setData((prev) => ({
-        //       ...prev,
-        //       [app]: fresh,
-        //       updateTime: fresh.updateTime || prev.updateTime,
-        //       updateDate: fresh.updateDate || prev.updateDate,
-        //     }));
-        //   } else {
-        //     console.warn(`⚠️ Skipping malformed SSE update for ${app}:`, fresh);
-        //   }
-        // }
       } catch (error) {
         console.error('💥 SSE error:', error);
       }
-    };
+    });
+
 
     return () => evtSource.close();
   }, []);
@@ -117,10 +103,10 @@ return (
         </div>
         <div className="row">
             <div className="col-xl-6">
-                <Hourly hourly = {data.Weather.hourly}/>
+                <Hourly hourly = {data.Weather.hourly.slice(0, 5)}/>
             </div>
             <div className="col-xl-6">
-                <Forecast forecast = {data.Weather.forecast} />
+                <Forecast forecast = {data.Weather.forecast.slice(0, 5)} />
             </div>
         </div>
         </Container>

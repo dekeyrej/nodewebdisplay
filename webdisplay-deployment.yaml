@@ -18,12 +18,12 @@ spec:
     spec:
       containers:
       - name: webdisplay
-        image: ghcr.io/dekeyrej/nodewebdisplay:latest
+        image: ghcr.io/dekeyrej/nodewebdisplay:dev
         imagePullPolicy: Always
         resources:
             requests:
               cpu: 10m
-              memory: 512i
+              memory: 512Mi
             limits:
               cpu: 100m
               memory: 1Gi
