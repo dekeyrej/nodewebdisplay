@@ -9,9 +9,9 @@ export default function Sidebar() {
                 <Nav.Link href="/nfl">NFL</Nav.Link>
                 <Nav.Link href="/mlb">MLB</Nav.Link>
                 <Nav.Link><hr></hr></Nav.Link>
-                <Nav.Link href="http://mmhost.local:8080/">MagicMirror</Nav.Link>
+                <Nav.Link href="http://gandalf.local:8080/">MagicMirror</Nav.Link>
                 <Nav.Link href={`https://${window.location.hostname}/dashboard/#/`}>Cluster Dashboard</Nav.Link>
-                <Nav.Link href="http://delphi.local:8080/">Open-WebUI</Nav.Link>
+                <Nav.Link href="http://galadriel.local:8080/">Open-WebUI</Nav.Link>
                 <Nav.Link href="http://grafana.local/">Grafana</Nav.Link>
             </Nav.Item>
         </Navbar>
