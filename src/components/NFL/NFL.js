@@ -86,7 +86,7 @@ export default function NFL() {
         <Stack direction="horizontal" className="NFL">
             <Container className="NFL">
                 <h2>National Football League - {data.NFL.seasontype}:<br/>
-                {data.NFL.weekname}
+                {data.NFL.weekname} - {data.NFL.weekdates}
                 </h2>
                 {renderGameRows(data.NFL.events)}
             </Container>
