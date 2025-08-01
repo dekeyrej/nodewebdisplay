@@ -11,7 +11,7 @@ function renderGame(value, index) {
     const components = {
         pre: PreGame,
         post: PostGame,
-        inProgress: InProgressGame,
+        in: InProgressGame,
     };
     const Component = components[value.state] || InProgressGame;
     return <Component key={index} value={value} />;
